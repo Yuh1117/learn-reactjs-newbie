@@ -6,13 +6,20 @@ class Mycomponent extends React.Component{
         age : 19
     }
 
-
+    handleClick = async () => {
+        await this.setState({
+            name : `gia huy`
+        })
+        console.log(`My name is ${this.state.name}`)
+        
+    }   
     //JSX
     render(){
         return(
             <div>
                 My name is {this.state.name} <br></br>
-                I am {this.state.age}
+                I am {this.state.age}<br></br>
+                <button onClick={(this.handleClick)}>Click me</button>
             </div>
             
         );

@@ -30,10 +30,10 @@ class DisplayInfo extends React.Component {
                                         <div>id: {user.id}</div>
                                         <div>name: {user.name}</div>
                                         <div>age: {user.age}</div>
-                                        <hr></hr>
+                                        <button onClick={() => {this.props.handleDeleteUser(user.id)}}>X</button>
+                                        <hr/>
                                     </div>
                                 )
-
                             })
                         }
                     </div>

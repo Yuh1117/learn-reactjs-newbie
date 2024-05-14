@@ -3,7 +3,7 @@ import React from "react";
 class AddUserInfo extends React.Component {
     state = {
         name: '',
-        age: null
+        age: ''
     }
 
     handleClick = async () => {
@@ -41,16 +41,16 @@ class AddUserInfo extends React.Component {
                 My name is {this.state.name} <br></br>
                 I am {this.state.age}<br></br>
                 <button onClick={this.handleClick}>Click me</button>
-                <form onSubmit={this.handleOnSubmit}>
+                <form onSubmit={(event) => {this.handleOnSubmit(event)}}>
                     <label>Your name: </label>
-                    <input value={this.state.name} type="text" onChange={this.handleOnChangeName}></input>
+                    <input value={this.state.name} type="text" onChange={(event) => {this.handleOnChangeName(event)}}></input>
 
-                    <br></br>
+                    <br/>
 
                     <label>Your age: </label>
-                    <input value={this.state.age} type="text" onChange={this.handleOnChangeAge}></input>
+                    <input value={this.state.age} type="text" onChange={(event) => {this.handleOnChangeAge(event)}}></input>
 
-                    <br></br>
+                    <br/>
 
                     <button>Submit</button>
                 </form>

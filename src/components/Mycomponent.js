@@ -1,6 +1,7 @@
-import React from "react";
-import UserInfo from "./UserInfo";
+import React, { useReducer } from "react";
+import UserInfo from "./AddUserInfo";
 import DisplayInfo from "./DisplayInfo";
+import AddUserInfo from "./AddUserInfo";
 
 class Mycomponent extends React.Component {
 
@@ -11,11 +12,19 @@ class Mycomponent extends React.Component {
             { id: 3, name: 'van', age: 18 }
         ]
     }
+
+    handleAddNewUser = (userObj) => {
+        this.setState({
+                listUsers: [userObj, ...this.state.listUsers],
+            }
+        )
+    }
+
     render() {
         return (
             <div>
-                <UserInfo />
-                <DisplayInfo listUsers = {this.state.listUsers} />
+                <AddUserInfo handleAddNewUser={this.handleAddNewUser} />
+                <DisplayInfo listUsers={this.state.listUsers} />
             </div>
         );
     }

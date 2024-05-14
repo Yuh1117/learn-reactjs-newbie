@@ -27,6 +27,7 @@ class DisplayInfo extends React.Component {
                                         <div>id: {user.id}</div>
                                         <div>name: {user.name}</div>
                                         <div>age: {user.age}</div>
+                                        <hr></hr>
                                     </div>
                                 )
 

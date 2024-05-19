@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DisplayInfo.scss";
 import logo from "../logo.svg";
 
@@ -67,12 +67,20 @@ import logo from "../logo.svg";
 const DisplayInfo = (props) => {
     const { listUsers } = props
 
-    const [isShow, setShowHideList] = useState(true) 
-    
+    const [isShow, setShowHideList] = useState(true)
 
-    const handleShowHideListUsers = () =>{
+
+    const handleShowHideListUsers = () => {
         setShowHideList(!isShow)
     }
+
+    useEffect(() => {
+        if (props.listUsers.length === 5) {
+            alert("5 users")
+        }
+        document.title = "huy"
+    }, [listUsers])
+
 
     return (
         <div className="display-info-container">
@@ -88,7 +96,7 @@ const DisplayInfo = (props) => {
                                     <div>id: {user.id}</div>
                                     <div>name: {user.name}</div>
                                     <div>age: {user.age}</div>
-                                    <button onClick={() => {props.handleDeleteUser(user.id) }}>X</button>
+                                    <button onClick={() => { props.handleDeleteUser(user.id) }}>X</button>
                                     <hr />
                                 </div>
                             )

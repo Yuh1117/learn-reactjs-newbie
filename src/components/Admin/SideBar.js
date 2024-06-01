@@ -5,6 +5,7 @@ import sidebarBg from '../../assets/bg2.jpg';
 import { DiReact } from 'react-icons/di';
 import { MdDashboard } from 'react-icons/md';
 import './SideBar.scss'
+import { Link } from 'react-router-dom';
 
 const SideBar = (props) => {
     const { image, collapsed, toggled, handleToggleSidebar } = props;
@@ -30,7 +31,7 @@ const SideBar = (props) => {
                             whiteSpace: 'nowrap',
                         }}
                     >
-                        <DiReact size={'3em'} color='#00bfff'/>
+                        <DiReact size={'3em'} color='#00bfff' />
                         VPGH
                     </div>
                 </SidebarHeader>
@@ -39,9 +40,10 @@ const SideBar = (props) => {
                     <Menu iconShape="circle">
                         <MenuItem
                             icon={<FaTachometerAlt />}
-                            // suffix={<span className="badge red">New</span>}
+                        // suffix={<span className="badge red">New</span>}
                         >
                             Dashboard
+                            <Link to="/admins" />
                         </MenuItem>
                         {/* <MenuItem icon={<FaGem />}> Components </MenuItem> */}
                     </Menu>
@@ -51,14 +53,17 @@ const SideBar = (props) => {
                             icon={<FaGem />}
                             title={'Features'}
                         >
-                            <MenuItem> Users Management</MenuItem>
+                            <MenuItem> Users Management
+                                <Link to="/admins/manage-user" />
+                            </MenuItem>
+
                             <MenuItem> Quizzes Management</MenuItem>
                             <MenuItem> Questions Management</MenuItem>
                         </SubMenu>
 
                     </Menu>
                 </SidebarContent>
-                
+
                 <SidebarFooter style={{ textAlign: 'center' }}>
                     <div
                         className="sidebar-btn-wrapper"

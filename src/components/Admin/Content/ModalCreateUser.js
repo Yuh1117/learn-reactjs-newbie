@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
+import { toast } from 'react-toastify';
 
 const ModalCreateUser = (props) => {
     const { show, setShow } = props;
@@ -31,18 +32,40 @@ const ModalCreateUser = (props) => {
         }
     }
 
+    const validateEmail = (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+      };
+
     const handleSubmitCreateUser = async () => {
         //validate
+        const isValidEmail = validateEmail(email);
+        if(!isValidEmail){
+            toast.error("Invalid email")
+            return
+        }
+
+        if(!password){
+            toast.error("Invalid password")
+            return
+        }
+
 
         //call apis
-        // let data = {
-        //     email: email,
-        //     password: password,
-        //     username: username,
-        //     role: role,
-        //     usesrImage: image
-        // }
 
+            // let data = {
+            //     email: email,
+            //     password: password,
+            //     username: username,
+            //     role: role,
+            //     usesrImage: image
+            // }
+
+        
+        //submit data
         const data = new FormData();
         data.append('email', email);
         data.append('password', password);
@@ -51,7 +74,16 @@ const ModalCreateUser = (props) => {
         data.append('userImage', image);
 
         let respond = await axios.post('http://localhost:8081/api/v1/participant', data)
-        console.log(respond)
+        console.log(respond.data)
+
+        if(respond.data && respond.data.EC === 0){
+            toast.success(respond.data.EM)
+            handleClose()
+        }
+
+        if(respond.data && respond.data.EC !== 0){
+            toast.error(respond.data.EM)
+        }
     }
 
     return (
